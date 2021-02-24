@@ -8,10 +8,15 @@
  *
  * @author Thomas Tapia
  */
-public class Juez {
+public class Juez extends Persona {
         
     //Variable de instacia
     private double vocalia;
+
+    public Juez(String nombre, String apellido, String cedula, double vocalia) {
+        super(nombre, apellido, cedula);
+        this.vocalia = vocalia;
+    }
             
     //Método de instancia
 
