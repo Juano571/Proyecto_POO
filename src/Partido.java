@@ -12,7 +12,7 @@ public class Partido {
     
     //Variables de instancia
     private int fecha;
-    protected Equipo numerodeEquipo;
+    protected Equipo numerodeEquipo[];
     
     //Métodos de instancia
     public String asignacionFecha(){
