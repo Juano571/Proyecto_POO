@@ -15,7 +15,7 @@ public class Equipo {
     private String nombreEquipo;
     private String representante;
     //Implemetación de relación de composición
-    ArrayList<Jugador> jugadores = new ArrayList<>();
+    ArrayList<Jugador> jugadores;
     
     //Constructor
     public Equipo(String nombreEquipo, String representante){
