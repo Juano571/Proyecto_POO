@@ -38,6 +38,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     public void limpiarEquipo() {
         txtNombreEquipo.setText("");
         txtRepresentante.setText("");
+        txtConctacto.setText("");
     }
 
     //Método que limpia solo los datos de Jugador
@@ -65,6 +66,8 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         lblRepresentante = new javax.swing.JLabel();
         txtRepresentante = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
+        lblConctacto = new javax.swing.JLabel();
+        txtConctacto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lblNombreJugador = new javax.swing.JLabel();
         txtNombreJugadores = new javax.swing.JTextField();
@@ -105,6 +108,8 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             }
         });
 
+        lblConctacto.setText("Contacto:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -112,8 +117,15 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(btnConfirmar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblConctacto)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtConctacto))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblRepresentante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -121,10 +133,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblNombreEquipo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(btnConfirmar)))
+                                .addComponent(txtNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -138,9 +147,13 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRepresentante)
                     .addComponent(txtRepresentante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConctacto)
+                    .addComponent(txtConctacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btnConfirmar)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de los jugadores"));
@@ -258,29 +271,30 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        arregloEquipos[contador] = new Equipo(txtNombreEquipo.getText(), txtRepresentante.getText());
+        arregloEquipos[contador] = new Equipo(txtNombreEquipo.getText(), txtRepresentante.getText(), txtConctacto.getText());
         btnConfirmar.setEnabled(false);
         btnAgregarJugador.setEnabled(true);
         txtNombreEquipo.setEnabled(false);
         txtRepresentante.setEnabled(false);
+        txtConctacto.setEnabled(false);
         txtNombreJugadores.setEnabled(true);
         txtApellidoJugador.setEnabled(true);
         txtCedula.setEnabled(true);
@@ -289,10 +303,16 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
-        jugadores.add(new Jugador(txtNombreJugadores.getText(), txtApellidoJugador.getText(), txtCedula.getText(),
-                Integer.parseInt(txtNumeroJugador.getText()), txtPosicion.getText()));
-        contadorJugadores++;
-        limpiarJugadores();
+        Jugador j = new Jugador(txtNombreJugadores.getText(), txtApellidoJugador.getText(), txtCedula.getText(),
+                Integer.parseInt(txtNumeroJugador.getText()), txtPosicion.getText());
+       
+        if (j.esCedula()) {
+             jugadores.add(j);
+            contadorJugadores++;
+            limpiarJugadores();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", "CÉDULA", 2);
+        }
         //Control de ingreso de datos de jugadores
         if (contadorJugadores == 11) {
             btmFinalizar.setEnabled(true);
@@ -316,6 +336,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         btmFinalizar.setEnabled(false);
         txtNombreEquipo.setEnabled(true);
         txtRepresentante.setEnabled(true);
+        txtConctacto.setEnabled(true);
         btnConfirmar.setEnabled(true);
         txtNombreJugadores.setEnabled(false);
         txtApellidoJugador.setEnabled(false);
@@ -369,6 +390,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblApellidoJugador;
     private javax.swing.JLabel lblCedula;
+    private javax.swing.JLabel lblConctacto;
     private javax.swing.JLabel lblNombreEquipo;
     private javax.swing.JLabel lblNombreJugador;
     private javax.swing.JLabel lblNumeroJugador;
@@ -376,6 +398,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblRepresentante;
     private javax.swing.JTextField txtApellidoJugador;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtConctacto;
     private javax.swing.JTextField txtNombreEquipo;
     private javax.swing.JTextField txtNombreJugadores;
     private javax.swing.JTextField txtNumeroJugador;

@@ -14,12 +14,15 @@ import java.util.ArrayList;
 public class Equipo {
     private String nombreEquipo;
     private String representante;
+    private String contactoRepresentante;
     //Implemetación de relación de composición
     ArrayList<Jugador> jugadores;
     
     //Constructor
-    public Equipo(String nombreEquipo, String representante){
+    public Equipo(String nombreEquipo, String representante, String contacto){
         this.nombreEquipo = nombreEquipo;
+        this.representante = representante;
+        this.contactoRepresentante = contacto;
     }
     
     //Métodos set 
@@ -35,6 +38,10 @@ public class Equipo {
         this.representante = representante;
     }
 
+    public void setContactoRepresentante(String contactoRepresentante) {
+        this.contactoRepresentante = contactoRepresentante;
+    }
+
     //Métodos get
     public String getNombreEquipo() {
         return nombreEquipo;
@@ -46,6 +53,10 @@ public class Equipo {
 
     public String getRepresentante() {
         return representante;
+    }
+
+    public String getContactoRepresentante() {
+        return contactoRepresentante;
     }
     
     //Métodos
