@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
+import java.util.regex.Matcher;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -43,7 +43,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
 
     //Método que limpia solo los datos de Jugador
     public void limpiarJugadores() {
-        txtNombreJugadores.setText("");
+        txtNombreJugador.setText("");
         txtApellidoJugador.setText("");
         txtCedula.setText("");
         txtNumeroJugador.setText("");
@@ -70,7 +70,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtConctacto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lblNombreJugador = new javax.swing.JLabel();
-        txtNombreJugadores = new javax.swing.JTextField();
+        txtNombreJugador = new javax.swing.JTextField();
         lblApellidoJugador = new javax.swing.JLabel();
         txtApellidoJugador = new javax.swing.JTextField();
         lblNumeroJugador = new javax.swing.JLabel();
@@ -160,7 +160,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
 
         lblNombreJugador.setText("Nombre:");
 
-        txtNombreJugadores.setEnabled(false);
+        txtNombreJugador.setEnabled(false);
 
         lblApellidoJugador.setText("Apellido:");
 
@@ -211,7 +211,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblNombreJugador)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNombreJugadores))
+                                .addComponent(txtNombreJugador))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -240,7 +240,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreJugador)
-                    .addComponent(txtNombreJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidoJugador)
@@ -289,29 +289,53 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        arregloEquipos[contador] = new Equipo(txtNombreEquipo.getText(), txtRepresentante.getText(), txtConctacto.getText());
-        btnConfirmar.setEnabled(false);
-        btnAgregarJugador.setEnabled(true);
-        txtNombreEquipo.setEnabled(false);
-        txtRepresentante.setEnabled(false);
-        txtConctacto.setEnabled(false);
-        txtNombreJugadores.setEnabled(true);
-        txtApellidoJugador.setEnabled(true);
-        txtCedula.setEnabled(true);
-        txtNumeroJugador.setEnabled(true);
-        txtPosicion.setEnabled(true);
+        if (txtNombreEquipo.getText().matches("[a-zA-z0-9]{3,}")) {
+            if (txtRepresentante.getText().matches("[a-zA-Z]+\s[a-zA-Z]+")) {
+                if (txtConctacto.getText().matches("[0][9][0-9]{8}")) {
+                    arregloEquipos[contador] = new Equipo(txtNombreEquipo.getText().toUpperCase(), txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase());
+                    btnConfirmar.setEnabled(false);
+                    btnAgregarJugador.setEnabled(true);
+                    txtNombreEquipo.setEnabled(false);
+                    txtRepresentante.setEnabled(false);
+                    txtConctacto.setEnabled(false);
+                    txtNombreJugador.setEnabled(true);
+                    txtApellidoJugador.setEnabled(true);
+                    txtCedula.setEnabled(true);
+                    txtNumeroJugador.setEnabled(true);
+                    txtPosicion.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Debe ingreasr un número de celular válido", "CONTACTO", 2);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar el nombre y el apellido", "NOMBRE DEL REPRESENTANTE", 2);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "El nombre del equipo debe tener más de 3 caracteres", "NOMBRE DEL EQUIPO", 2);
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
-        Jugador j = new Jugador(txtNombreJugadores.getText(), txtApellidoJugador.getText(), txtCedula.getText(),
-                Integer.parseInt(txtNumeroJugador.getText()), txtPosicion.getText());
-       
-        if (j.esCedula()) {
-             jugadores.add(j);
-            contadorJugadores++;
-            limpiarJugadores();
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", "CÉDULA", 2);
+
+        if (txtNombreJugador.getText().matches("[a-zA-Z]+")) {
+            if (txtApellidoJugador.getText().matches("[a-zA-Z]+")) {
+                if (txtNumeroJugador.getText().matches("[0-9]{1,2}")) {
+                    Jugador j = new Jugador(txtNombreJugador.getText(), txtApellidoJugador.getText(), txtCedula.getText(),
+                            Integer.parseInt(txtNumeroJugador.getText()), txtPosicion.getText());
+                    if (j.esCedula()) {
+                        jugadores.add(j);
+                        contadorJugadores++;
+                        limpiarJugadores();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", "CÉDULA", 2);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "El numero debe ser de uno o dos dígitos", "NÚMERO DE JUGADOR", 2);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "EL apellido del jugador solo debe tener letras", "APELLIDO DEL JUGADOR", 2);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "El nombre del jugador debe tener solo letras", "NOMBRE DEL JUGADOR", 2);
         }
         //Control de ingreso de datos de jugadores
         if (contadorJugadores == 11) {
@@ -319,7 +343,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         }
         if (contadorJugadores == 15) {
             btnAgregarJugador.setEnabled(false);
-            txtNombreJugadores.setEnabled(false);
+            txtNombreJugador.setEnabled(false);
             txtApellidoJugador.setEnabled(false);
             txtCedula.setEnabled(false);
             txtNumeroJugador.setEnabled(false);
@@ -338,7 +362,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtRepresentante.setEnabled(true);
         txtConctacto.setEnabled(true);
         btnConfirmar.setEnabled(true);
-        txtNombreJugadores.setEnabled(false);
+        txtNombreJugador.setEnabled(false);
         txtApellidoJugador.setEnabled(false);
         txtCedula.setEnabled(false);
         txtNumeroJugador.setEnabled(false);
@@ -400,7 +424,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtConctacto;
     private javax.swing.JTextField txtNombreEquipo;
-    private javax.swing.JTextField txtNombreJugadores;
+    private javax.swing.JTextField txtNombreJugador;
     private javax.swing.JTextField txtNumeroJugador;
     private javax.swing.JTextField txtPosicion;
     private javax.swing.JTextField txtRepresentante;
