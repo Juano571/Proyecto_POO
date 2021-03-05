@@ -18,10 +18,11 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     int numeroEquipos;
     int contador = 0;  //Contador para arreglo de Equipos
     int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
-    String fechas="";
+    String fechas = "";
     int[][] fechasMatriz;
     int contadorFechas = 0;
-
+    boolean aceptar = false;
+    int contadorFechas1 = 0;
     public GUICampeonato1() {
         initComponents();
         p = new Partido();
@@ -384,19 +385,32 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtCedula.setEnabled(false);
         txtNumeroJugador.setEnabled(false);
         txtPosicion.setEnabled(false);
+        btnAgregarJugador.setEnabled(false);
         //limpiarEquipo();
 
         if (contador == numeroEquipos) {
+            while(aceptar == false){
+                
+            }
             for (int i = 0; i < fechasMatriz[0].length; i++) {
                 fechas += "fecha " + i + " \n\n";
-                for (int j = 0; j < fechasMatriz.length;j++) {
-                    
+                for (int j = 0; j < fechasMatriz.length; j++) {
+
                     fechas += p.getEquipos().get(fechasMatriz[j][i]).getNombreEquipo() + "\n";
-                    if(j == 1){
-                        j = 0;
+                    if (i < fechasMatriz[0].length) {
+                        if (j == 1) {
+                            j = contadorFechas;
+                        }
+
+                    } else {
+                        contadorFechas += 2;
+                        j = contadorFechas;
                     }
                 }
                 fechas += "\n\n";
+                if(contadorFechas1 == (numeroEquipos-1)){
+                    aceptar = true;
+                }
 
             }
 
