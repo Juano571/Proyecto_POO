@@ -287,7 +287,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         if (txtNombreEquipo.getText().matches("[a-zA-z0-9]{3,}")) {
-            if (txtRepresentante.getText().matches("[a-zA-Z]+\s[a-zA-Z]+")) {
+            if (txtRepresentante.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+")) {
                 if (txtConctacto.getText().matches("[0][9][0-9]{8}")) {
                     p.agregarEquipo(new Equipo(txtNombreEquipo.getText().toUpperCase(), txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase()));
                     btnConfirmar.setEnabled(false);
