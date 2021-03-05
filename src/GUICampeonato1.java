@@ -18,6 +18,9 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     int numeroEquipos;
     int contador = 0;  //Contador para arreglo de Equipos
     int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
+    String fechas="";
+    int[][] fechasMatriz;
+    int contadorFechas = 0;
 
     public GUICampeonato1() {
         initComponents();
@@ -29,6 +32,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", "NÚMERO DE EQUIPOS", 2);
             System.exit(0);
         }
+        fechasMatriz = Partido.generarFechas(numeroEquipos);
     }
 
     //Método que limpia solo los datos de Equipo 
@@ -78,6 +82,9 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         lblCedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         btmFinalizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaFechas = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,6 +268,12 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
+        txaFechas.setColumns(20);
+        txaFechas.setRows(5);
+        jScrollPane1.setViewportView(txaFechas);
+
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,18 +281,26 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -321,7 +342,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                     if (j.esCedula()) {
                         p.getEquipos().get(contador).agregarJugador(j);
                         contadorJugadores++;
-                        limpiarJugadores();
+                        //limpiarJugadores();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", "CÉDULA", 2);
                     }
@@ -335,7 +356,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "El nombre del jugador debe tener solo letras", "NOMBRE DEL JUGADOR", 2);
         }
         //Control de ingreso de datos de jugadores
-        if (contadorJugadores == 11) {
+        if (contadorJugadores == 1) {
             btmFinalizar.setEnabled(true);
         }
         if (contadorJugadores == 15) {
@@ -363,7 +384,25 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtCedula.setEnabled(false);
         txtNumeroJugador.setEnabled(false);
         txtPosicion.setEnabled(false);
-        limpiarEquipo();
+        //limpiarEquipo();
+
+        if (contador == numeroEquipos) {
+            for (int i = 0; i < fechasMatriz[0].length; i++) {
+                fechas += "fecha " + i + " \n\n";
+                for (int j = 0; j < fechasMatriz.length;j++) {
+                    
+                    fechas += p.getEquipos().get(fechasMatriz[j][i]).getNombreEquipo() + "\n";
+                    if(j == 1){
+                        j = 0;
+                    }
+                }
+                fechas += "\n\n";
+
+            }
+
+            txaFechas.setText(fechas);
+        }
+
     }//GEN-LAST:event_btmFinalizarActionPerformed
 
     /**
@@ -405,9 +444,11 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     private javax.swing.JButton btmFinalizar;
     private javax.swing.JButton btnAgregarJugador;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApellidoJugador;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblConctacto;
@@ -416,6 +457,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumeroJugador;
     private javax.swing.JLabel lblPosicion;
     private javax.swing.JLabel lblRepresentante;
+    private javax.swing.JTextArea txaFechas;
     private javax.swing.JTextField txtApellidoJugador;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtConctacto;
