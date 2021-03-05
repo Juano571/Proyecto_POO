@@ -1,31 +1,34 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Thomas Tapia
  */
 public class Partido {
-    
+
     //Variables de instancia
     private int fecha;
-    protected Equipo numerodeEquipo[];
-    
+    ArrayList<Equipo> equipos = new ArrayList<Equipo>();
+
     //Métodos de instancia
-    public String asignacionFecha(){
-        return "";
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
     }
 
-    public int getFecha() {
-        return fecha;
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
-    public void setFecha(int fecha) {
-        this.fecha = fecha;
+    
+ //Método que recibe equipos y los agrega al a
+    public void agregarEquipo(Equipo e) {
+        this.equipos.add(e);
     }
-    
-    
+
 }

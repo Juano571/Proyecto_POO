@@ -11,12 +11,12 @@ import java.util.ArrayList;
  * 
  * @author Juan Arellano <juan.arellano at epn.edu.ec>
  */
-public class Equipo {
+public class Equipo extends Partido{
     private String nombreEquipo;
     private String representante;
     private String contactoRepresentante;
     //Implemetación de relación de composición
-    ArrayList<Jugador> jugadores;
+    ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     
     //Constructor
     public Equipo(String nombreEquipo, String representante, String contacto){

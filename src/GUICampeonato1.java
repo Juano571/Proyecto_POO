@@ -14,14 +14,14 @@ import java.util.regex.Matcher;
  */
 public class GUICampeonato1 extends javax.swing.JFrame {
 
-    Equipo arregloEquipos[];
+    Partido p;
     int numeroEquipos;
     int contador = 0;  //Contador para arreglo de Equipos
     int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
-    ArrayList<Jugador> jugadores = new ArrayList<>(); //Declaracion de ArrayList para jugadores
 
     public GUICampeonato1() {
         initComponents();
+        p = new Partido();
         try {
             numeroEquipos = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "¿Cuántos equipos desea ingresar?", "CAMPEONATO", JOptionPane.QUESTION_MESSAGE));
 
@@ -29,9 +29,6 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", "NÚMERO DE EQUIPOS", 2);
             System.exit(0);
         }
-
-        arregloEquipos = new Equipo[numeroEquipos];
-
     }
 
     //Método que limpia solo los datos de Equipo 
@@ -292,7 +289,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         if (txtNombreEquipo.getText().matches("[a-zA-z0-9]{3,}")) {
             if (txtRepresentante.getText().matches("[a-zA-Z]+\s[a-zA-Z]+")) {
                 if (txtConctacto.getText().matches("[0][9][0-9]{8}")) {
-                    arregloEquipos[contador] = new Equipo(txtNombreEquipo.getText().toUpperCase(), txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase());
+                    p.agregarEquipo(new Equipo(txtNombreEquipo.getText().toUpperCase(), txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase()));
                     btnConfirmar.setEnabled(false);
                     btnAgregarJugador.setEnabled(true);
                     txtNombreEquipo.setEnabled(false);
@@ -322,7 +319,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                     Jugador j = new Jugador(txtNombreJugador.getText(), txtApellidoJugador.getText(), txtCedula.getText(),
                             Integer.parseInt(txtNumeroJugador.getText()), txtPosicion.getText());
                     if (j.esCedula()) {
-                        jugadores.add(j);
+                        p.getEquipos().get(contador).agregarJugador(j);
                         contadorJugadores++;
                         limpiarJugadores();
                     } else {
@@ -353,10 +350,9 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarJugadorActionPerformed
 
     private void btmFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmFinalizarActionPerformed
-        arregloEquipos[contador].jugadores = jugadores;
+
         contador++;
         contadorJugadores = 0;
-        jugadores.clear();
         btmFinalizar.setEnabled(false);
         txtNombreEquipo.setEnabled(true);
         txtRepresentante.setEnabled(true);
