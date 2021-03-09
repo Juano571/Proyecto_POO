@@ -20,7 +20,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
     String fechas = "";
     int[][] fechasMatriz;
-    
+
     public GUICampeonato1() {
         initComponents();
         p = new Partido();
@@ -31,8 +31,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", "NÚMERO DE EQUIPOS", 2);
             System.exit(0);
         }
-        
-        
+
     }
 
     //Método que limpia solo los datos de Equipo 
@@ -386,28 +385,24 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtPosicion.setEnabled(false);
         btnAgregarJugador.setEnabled(false);
         //limpiarEquipo();
-        
 
         if (contador == numeroEquipos) {
 
-            if(numeroEquipos%2==0){
+            if (numeroEquipos % 2 == 0) {
                 fechasMatriz = Partido.generarFechas(numeroEquipos);
-            }else{
+            } else {
                 numeroEquipos++;
-                p.agregarEquipo(new Equipo("descanza",null,null));
+                p.agregarEquipo(new Equipo("descanza", null, null));
                 fechasMatriz = Partido.generarFechas(numeroEquipos);
-            } 
-            
-            
-            
-            for(int i=0;i<(numeroEquipos-1)*2;i+=2){
-                fechas+="FECHA "+(i/2+1)+"\n\n";
-                for(int j=0;j<numeroEquipos/2;j++){
-                    fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  -  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"             "; 
-                    
-                }
-                fechas+="\n\n";
             }
+            fechas+="PRIMERA VUELTA\n\n\n";
+            fechas+=llenarStringFechas(fechasMatriz);
+
+            invertirMatriz(fechasMatriz);
+            
+            fechas+="\n\nSEGUNDA VUELTA\n\n\n";
+            
+            fechas+=llenarStringFechas(fechasMatriz);
 
             txaFechas.setText(fechas);
         }
@@ -417,30 +412,32 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    public static void llenarStringFechas(String fechas, int fechasMatriz[][],int numeroEquipos){
-        for(int i=0;i<(numeroEquipos-1)*2;i+=2){
-                fechas+="FECHA "+(i/2+1)+"\n\n";
-                for(int j=0;j<numeroEquipos/2;j++){
-                    //fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  -  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"\n\n"; 
-                    
-                }
-                fechas+="\n\n";
+    public String llenarStringFechas(int fechasMatriz[][]) {
+        String fechas1="";
+        for (int i = 0; i < (numeroEquipos - 1) * 2; i += 2) {
+            fechas1 += "FECHA " + (i / 2 + 1) + "\n\n";
+            for (int j = 0; j < numeroEquipos / 2; j++) {
+                fechas1 += p.getEquipos().get(fechasMatriz[j][i] - 1).getNombreEquipo() + "  -  " + p.getEquipos().get(fechasMatriz[j][i + 1] - 1).getNombreEquipo() + "           ";
+
             }
+            fechas1 += "\n\n";
+        }
+        return fechas1;
         
+
     }
-    
-    public static void invertirMatriz(int matriz[][]){
-        int aux[]=new int[matriz.length];
-        for(int k =0,j=matriz[1].length-1;k<matriz[1].length/2;j--,k++){
-            for(int i =0;i<matriz.length;i++){
-                aux[i]=matriz[i][k];
-                matriz[i][k]=matriz[i][j];
-                matriz[i][j]=aux[i];
+
+    public static void invertirMatriz(int matriz[][]) {
+        int aux[] = new int[matriz.length];
+        for (int k = 0, j = matriz[1].length - 1; k < matriz[1].length / 2; j--, k++) {
+            for (int i = 0; i < matriz.length; i++) {
+                aux[i] = matriz[i][k];
+                matriz[i][k] = matriz[i][j];
+                matriz[i][j] = aux[i];
             }
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
