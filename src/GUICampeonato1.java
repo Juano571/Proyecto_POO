@@ -20,9 +20,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
     String fechas = "";
     int[][] fechasMatriz;
-    int contadorFechas = 0;
-    boolean aceptar = false;
-    int contadorFechas1 = 0;
+    
     public GUICampeonato1() {
         initComponents();
         p = new Partido();
@@ -387,31 +385,34 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         txtPosicion.setEnabled(false);
         btnAgregarJugador.setEnabled(false);
         //limpiarEquipo();
+        
 
         if (contador == numeroEquipos) {
-            while(aceptar == false){
-                
+            
+            for(int k =0;k<fechasMatriz[1].length;k++){
+            for(int i =0;i<fechasMatriz.length;i++){
+                System.out.print(fechasMatriz[i][k]+"         ");
             }
-            for (int i = 0; i < fechasMatriz[0].length; i++) {
-                fechas += "fecha " + i + " \n\n";
-                for (int j = 0; j < fechasMatriz.length; j++) {
-
-                    fechas += p.getEquipos().get(fechasMatriz[j][i]).getNombreEquipo() + "\n";
-                    if (i < fechasMatriz[0].length) {
-                        if (j == 1) {
-                            j = contadorFechas;
-                        }
-
-                    } else {
-                        contadorFechas += 2;
-                        j = contadorFechas;
-                    }
+            if(k%2==0){
+                System.out.println("");
+            }else{
+                System.out.println("\n\n");
+            }
+            
+                
+            
+        }  
+            for (int i = 0; i < numeroEquipos; i++) {
+                    System.out.println(p.getEquipos().get(i).getNombreEquipo());
                 }
-                fechas += "\n\n";
-                if(contadorFechas1 == (numeroEquipos-1)){
-                    aceptar = true;
+            
+            for(int i=0;i<(numeroEquipos-1)*2;i+=2){
+                fechas+="FECHA "+(i/2+1)+"\n\n";
+                for(int j=0;j<numeroEquipos/2;j++){
+                    fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  vs  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"\n\n"; 
+                    
                 }
-
+                fechas+="\n\n";
             }
 
             txaFechas.setText(fechas);
