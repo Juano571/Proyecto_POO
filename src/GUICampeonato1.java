@@ -31,7 +31,8 @@ public class GUICampeonato1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", "NÚMERO DE EQUIPOS", 2);
             System.exit(0);
         }
-        fechasMatriz = Partido.generarFechas(numeroEquipos);
+        
+        
     }
 
     //Método que limpia solo los datos de Equipo 
@@ -388,28 +389,21 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         
 
         if (contador == numeroEquipos) {
-            
-            for(int k =0;k<fechasMatriz[1].length;k++){
-            for(int i =0;i<fechasMatriz.length;i++){
-                System.out.print(fechasMatriz[i][k]+"         ");
-            }
-            if(k%2==0){
-                System.out.println("");
+
+            if(numeroEquipos%2==0){
+                fechasMatriz = Partido.generarFechas(numeroEquipos);
             }else{
-                System.out.println("\n\n");
-            }
+                numeroEquipos++;
+                p.agregarEquipo(new Equipo("descanza",null,null));
+                fechasMatriz = Partido.generarFechas(numeroEquipos);
+            } 
             
-                
             
-        }  
-            for (int i = 0; i < numeroEquipos; i++) {
-                    System.out.println(p.getEquipos().get(i).getNombreEquipo());
-                }
             
             for(int i=0;i<(numeroEquipos-1)*2;i+=2){
                 fechas+="FECHA "+(i/2+1)+"\n\n";
                 for(int j=0;j<numeroEquipos/2;j++){
-                    fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  vs  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"\n\n"; 
+                    fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  -  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"             "; 
                     
                 }
                 fechas+="\n\n";
@@ -423,6 +417,30 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public static void llenarStringFechas(String fechas, int fechasMatriz[][],int numeroEquipos){
+        for(int i=0;i<(numeroEquipos-1)*2;i+=2){
+                fechas+="FECHA "+(i/2+1)+"\n\n";
+                for(int j=0;j<numeroEquipos/2;j++){
+                    //fechas+=p.getEquipos().get(fechasMatriz[j][i]-1).getNombreEquipo()+"  -  "+p.getEquipos().get(fechasMatriz[j][i+1]-1).getNombreEquipo()+"\n\n"; 
+                    
+                }
+                fechas+="\n\n";
+            }
+        
+    }
+    
+    public static void invertirMatriz(int matriz[][]){
+        int aux[]=new int[matriz.length];
+        for(int k =0,j=matriz[1].length-1;k<matriz[1].length/2;j--,k++){
+            for(int i =0;i<matriz.length;i++){
+                aux[i]=matriz[i][k];
+                matriz[i][k]=matriz[i][j];
+                matriz[i][j]=aux[i];
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
