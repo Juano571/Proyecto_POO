@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Partido {
 
     //Variables de instancia
-    private int fecha;
+    public static int[][] fechas;
     ArrayList<Equipo> equipos = new ArrayList<Equipo>();
 
     //Métodos de instancia
@@ -27,7 +27,7 @@ public class Partido {
     
 
     
- //Método que recibe equipos y los agrega al a
+ //Método que recibe equipos y los agrega al array
     public void agregarEquipo(Equipo e) {
         this.equipos.add(e);
     }
@@ -36,7 +36,7 @@ public class Partido {
         // TODO code application logic here
         
         int j=1;
-        int[][]fechas=new int[numEquipos/2][(numEquipos-1)*2];
+        fechas=new int[numEquipos/2][(numEquipos-1)*2];
         
         
         for(int k=0;k<(numEquipos-1)*2;k+=2){

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * 
  * @author Juan Arellano <juan.arellano at epn.edu.ec>
  */
-public class Equipo extends Partido{
+public class Equipo {
     private String nombreEquipo;
     private String representante;
     private String contactoRepresentante;
