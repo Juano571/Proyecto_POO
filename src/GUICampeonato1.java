@@ -446,7 +446,7 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                     "NOMBRE DEL JUGADOR", 2);
         }
         //Control de ingreso de datos de jugadores
-        if (contadorJugadores == 1) {
+        if (contadorJugadores == 11) {
             btmFinalizar.setEnabled(true);
         }
         if (contadorJugadores == 15) {
