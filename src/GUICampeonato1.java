@@ -48,21 +48,26 @@ public class GUICampeonato1 extends javax.swing.JFrame {
     
     Partido p;
     int numeroEquipos;
-    int contador = 0;  //Contador para arreglo de Equipos
-    int contadorJugadores = 0; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
-    String fechas = "";
+    int contador;  //Contador para arreglo de Equipos
+    int contadorJugadores; //Contador para controlar el ingreso de jugadores (Min=11 y Max=15)
+    String fechas;
     int[][] fechasMatriz;
 
     public GUICampeonato1() {
         this.setResizable(false);
         this.setContentPane(fondo);
         initComponents();
+        contador = 0;
+        contadorJugadores = 0;
+        fechas = "";
         p = new Partido();
         try {
-            numeroEquipos = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "¿Cuántos equipos desea ingresar?", "CAMPEONATO", JOptionPane.QUESTION_MESSAGE));
+            numeroEquipos = Integer.parseInt(JOptionPane.showInputDialog(rootPane, 
+                    "¿Cuántos equipos desea ingresar?", "CAMPEONATO", JOptionPane.QUESTION_MESSAGE));
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", "NÚMERO DE EQUIPOS", 2);
+            JOptionPane.showMessageDialog(rootPane, "Dede ingresar un número entero y par", 
+                    "NÚMERO DE EQUIPOS", 2);
             System.exit(0);
         }
 
@@ -387,7 +392,8 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         if (txtNombreEquipo.getText().matches("[a-zA-z0-9]{3,}")) {
             if (txtRepresentante.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+")) {
                 if (txtConctacto.getText().matches("[0][9][0-9]{8}")) {
-                    p.agregarEquipo(new Equipo(txtNombreEquipo.getText().toUpperCase(), txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase()));
+                    p.agregarEquipo(new Equipo(txtNombreEquipo.getText().toUpperCase(), 
+                            txtRepresentante.getText().toUpperCase(), txtConctacto.getText().toUpperCase()));
                     btnConfirmar.setEnabled(false);
                     btnAgregarJugador.setEnabled(true);
                     txtNombreEquipo.setEnabled(false);
@@ -399,13 +405,16 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                     txtNumeroJugador.setEnabled(true);
                     txtPosicion.setEnabled(true);
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Debe ingreasr un número de celular válido", "CONTACTO", 2);
+                    JOptionPane.showMessageDialog(rootPane, "Debe ingreasr un número de celular válido",
+                            "CONTACTO", 2);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Debe ingresar el nombre y el apellido", "NOMBRE DEL REPRESENTANTE", 2);
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar el nombre y el apellido",
+                        "NOMBRE DEL REPRESENTANTE", 2);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "El nombre del equipo debe tener más de 3 caracteres", "NOMBRE DEL EQUIPO", 2);
+            JOptionPane.showMessageDialog(rootPane, "El nombre del equipo debe tener más de 3 caracteres", 
+                    "NOMBRE DEL EQUIPO", 2);
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -421,19 +430,23 @@ public class GUICampeonato1 extends javax.swing.JFrame {
                         contadorJugadores++;
                         limpiarJugadores();
                     } else {
-                        JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", "CÉDULA", 2);
+                        JOptionPane.showMessageDialog(rootPane, "El número de cédula no es válido", 
+                                "CÉDULA", 2);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "El numero debe ser de uno o dos dígitos", "NÚMERO DE JUGADOR", 2);
+                    JOptionPane.showMessageDialog(rootPane, "El numero debe ser de uno o dos dígitos",
+                            "NÚMERO DE JUGADOR", 2);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "EL apellido del jugador solo debe tener letras", "APELLIDO DEL JUGADOR", 2);
+                JOptionPane.showMessageDialog(rootPane, "EL apellido del jugador solo debe tener letras",
+                        "APELLIDO DEL JUGADOR", 2);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "El nombre del jugador debe tener solo letras", "NOMBRE DEL JUGADOR", 2);
+            JOptionPane.showMessageDialog(rootPane, "El nombre del jugador debe tener solo letras",
+                    "NOMBRE DEL JUGADOR", 2);
         }
         //Control de ingreso de datos de jugadores
-        if (contadorJugadores == 11) {
+        if (contadorJugadores == 1) {
             btmFinalizar.setEnabled(true);
         }
         if (contadorJugadores == 15) {
@@ -495,7 +508,8 @@ public class GUICampeonato1 extends javax.swing.JFrame {
         for (int i = 0; i < (numeroEquipos - 1) * 2; i += 2) {
             fechas1 += "FECHA " + (i / 2 + 1) + "\n\n";
             for (int j = 0; j < numeroEquipos / 2; j++) {
-                fechas1 += p.getEquipos().get(fechasMatriz[j][i] - 1).getNombreEquipo() + "  -  " + p.getEquipos().get(fechasMatriz[j][i + 1] - 1).getNombreEquipo() + "           ";
+                fechas1 += p.getEquipos().get(fechasMatriz[j][i] - 1).getNombreEquipo() + "  -  " 
+                        + p.getEquipos().get(fechasMatriz[j][i + 1] - 1).getNombreEquipo() + "           ";
 
             }
             fechas1 += "\n\n";
